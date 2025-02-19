@@ -3,7 +3,9 @@ const express = require("express")
 const app = require("./config/config.js")
 const { engine } = require("express-handlebars")
 const path = require("path")
+const sequelize = require("./sequelize/config.js")
 const Ip = require("./infra/ip.js")
+
 
 app.use(express.json())
 app.engine("handlebars", engine())
