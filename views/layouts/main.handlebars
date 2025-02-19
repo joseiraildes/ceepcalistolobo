@@ -25,17 +25,19 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/sobre">Sobre nós</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/{{nome}}">{{nomes}}</a>
+              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{nome}}
+                  Cursos
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/@{{nome}}">Seu perfil</a></li>
                   <li><a class="dropdown-item" href="/bloco/1/adm">Administração</a></li>
                   <li><a class="dropdown-item" href="/bloco/1/dds">Desenvolvimento de Sistemas</a></li>
                   <li><a class="dropdown-item" href="/bloco/1/far">Farmacia</a></li>
