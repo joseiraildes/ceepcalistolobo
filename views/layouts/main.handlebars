@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <title>Ceep Calisto Lobo - Floriano PI</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  </head>
+
+  <body>
+    <nav class="navbar bg-body-tertiary border-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          {{!-- https://instagram.fflb1-1.fna.fbcdn.net/v/t51.2885-19/280178133_140451015229636_2581803983973883088_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fflb1-1.fna.fbcdn.net&_nc_cat=104&_nc_oc=Q6cZ2AE2N8a0yFRPckUF27UkQ2x-Wuw3CkWOIRUtxbjeSowRWYTgUcT7xIsZZpg3ttQVPT6N8wEcNJ71NLKuebr8A0Na&_nc_ohc=XDnK8RooHncQ7kNvgGUgNAd&_nc_gid=4ce0ef799cf24df595b431bcc62adeed&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AYA6i9lxnVh4An4-HkHmrRMR816PV0v4omxMMyV2N4yC9Q&oe=67BBDA4D&_nc_sid=7a9f4b --}}
+          <img src="/logoMarca.jpg" alt="Ceep Calisto Lobo - Floriano PI" class="card-img-top rounded-circle" width="70" height="70" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Ceep Calisto Lobo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/sobre">Sobre nós</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{nome}}
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/@{{nome}}">Seu perfil</a></li>
+                  <li><a class="dropdown-item" href="/bloco/1/adm">Administração</a></li>
+                  <li><a class="dropdown-item" href="/bloco/1/dds">Desenvolvimento de Sistemas</a></li>
+                  <li><a class="dropdown-item" href="/bloco/1/far">Farmacia</a></li>
+                  {{!-- <li><a class="dropdown-item" href="/bloco/1/adm">Adm</a></li> --}}
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item text-danger" href="/logout">Sair</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex mt-3" role="search" action="/search">
+              <input class="form-control me-2" type="search" placeholder="Pesquisar..." aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  </body>
+</html>
