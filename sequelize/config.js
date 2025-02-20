@@ -5,17 +5,18 @@ require("dotenv").config()
 // no dotenv
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    dialect: "mysql",
-    logging: false,
-    define: {
-      timestamps: true,
-    },
-  }
+  // process.env.DB_NAME,
+  // process.env.DB_USER,
+  // process.env.DB_PASSWORD,
+  // {
+  //   host: process.env.DB_HOST,
+  //   dialect: "mysql",
+  //   logging: false,
+  //   define: {
+  //     timestamps: true,
+  //   },
+  // }
+  "mysql://root:vukZfdyNKLzCIKKzZjRsgsqKnfKdQPZn@gondola.proxy.rlwy.net:36231/railway"
 );
 
 module.exports = sequelize;
