@@ -10,6 +10,7 @@ const User = require("./models/Users.js")
 
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
 app.set("views", path.join(__dirname + "/views"))
@@ -92,15 +93,15 @@ app.post("/login", async(req, res)=>{
   try{
     const user = await User.findOne({
       where: {
-        email: email,
-        senha: senha
+        email,
+        senha
       }
     })
     if(user === null){
       res.render("login", {
         notify: `
           <div
-            class="alert alert-primary alert-dismissible fade show"
+            class="alert alert-danger alert-dismissible fade show"
             role="alert"
           >
             <button
@@ -115,11 +116,8 @@ app.post("/login", async(req, res)=>{
               </strong>
             </h2>
             <hr>
-            <span>Você deve ser aluno do CEEP Calisto Lobo para poder acessar este website.</span>
+            <span>E-mail ou senha inválidos! Por favor, insira dados válidos para poder entrar no sistema.</span>
             <br>
-            <small class="text-muted">
-              Caso já esteja cadastrado no sistema da escola, acesse sua conta informando seu e-mail e senha abaixo.
-            </small>
           </div>
           <br>
         `
@@ -128,10 +126,22 @@ app.post("/login", async(req, res)=>{
         message: "Credenciais inválidas"
       })
     }else{
-      res.json({
-        message: "Success",
-        userName: user["nome"]
+
+      const userUpdate = await User.update({
+        ip
+      }, {
+        where: {
+          email,
+          senha
+        }
       })
+
+      console.log({
+        message: "Success",
+        userUpdate
+      })
+
+      res.redirect('/')
     }
   }catch(error){
     console.error("Error fetching user:", error)
