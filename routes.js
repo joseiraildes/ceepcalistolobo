@@ -84,3 +84,60 @@ app.get("/login", async(req, res)=>{
     })
   }
 })
+
+app.post("/login", async(req, res)=>{
+  const ip = await Ip()
+  const { email, senha } = req.body
+
+  try{
+    const user = await User.findOne({
+      where: {
+        email: email,
+        senha: senha
+      }
+    })
+    if(user === null){
+      res.render("login", {
+        notify: `
+          <div
+            class="alert alert-primary alert-dismissible fade show"
+            role="alert"
+          >
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+            <h2>
+              <strong>
+                Aviso!!
+              </strong>
+            </h2>
+            <hr>
+            <span>Você deve ser aluno do CEEP Calisto Lobo para poder acessar este website.</span>
+            <br>
+            <small class="text-muted">
+              Caso já esteja cadastrado no sistema da escola, acesse sua conta informando seu e-mail e senha abaixo.
+            </small>
+          </div>
+          <br>
+        `
+      })
+      console.log({
+        message: "Credenciais inválidas"
+      })
+    }else{
+      res.json({
+        message: "Success",
+        userName: user["nome"]
+      })
+    }
+  }catch(error){
+    console.error("Error fetching user:", error)
+    res.status(500).json({
+      message: "Error fetching user",
+      error: error
+    })
+  }
+})
