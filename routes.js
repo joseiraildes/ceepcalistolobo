@@ -27,7 +27,7 @@ app.get("/", async(req, res)=>{
       }
     })
     if(user===null){
-      res.render("home")
+      res.redirect("/login")
 
       console.log({
         message: "User not found",
