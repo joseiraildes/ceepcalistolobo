@@ -58,3 +58,29 @@ app.get("/", async(req, res)=>{
   }
 
 })
+
+app.get("/login", async(req, res)=>{
+  const ip = await Ip()
+  try{
+    const user = await User.findOne({
+      where: {
+        ip: ip
+      }
+    })
+    if(user === null){
+      res.render("login")
+    }else{
+      res.redirect("/")
+      console.log({
+        message: "User already exists",
+        userName: user["nome"]
+      })
+    }
+  }catch(error){
+    console.error("Error fetching user:", error)
+    res.status(500).json({
+      message: "Error fetching user",
+      error: error
+    })
+  }
+})
