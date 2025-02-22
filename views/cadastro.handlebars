@@ -1,0 +1,97 @@
+<div class="container">
+  <div
+    class="alert alert-primary alert-dismissible fade show"
+    role="alert"
+  >
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+    {{!-- <h2>
+      <strong>
+        Aviso!!
+      </strong>
+    </h2>
+    <hr> --}}
+    <span>Você deve ser aluno do CEEP Calisto Lobo para poder acessar este website.</span>
+    <br>
+    <small class="text-muted">
+      Caso não você não seja do CEEP, iremos verificar seus dados para comprovar se realmente está apto para utilizar toda a estrutura oferecida.
+    </small>
+  </div>
+  <br>
+</div>
+
+<script>
+  var alertList = document.querySelectorAll(".alert");
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert);
+  });
+</script>
+
+<div class="container card">
+  <div class="p-3">
+    <div class="text-center">
+      <img src="/logoMarca.jpg" alt="Ceep Image rounded-circle" width="150" height="150">
+    </div>
+
+    {{{notify}}}
+
+    <form action="/cadastro" method="post">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" name="nome" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Endereço e-mail</label>
+        <input type="email" class="form-control" name="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" class="form-control" name="senha" required>
+      </div>
+      <div class="mb-3">
+        <label for="data_nasc" class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" name="data_nasc" required>
+      </div>
+      <div class="mb-3">
+        <div class="mb-3">
+          <label for="curso" class="form-label">Curso</label>
+          <select class="form-select" name="curso" required>
+            <option value="" disabled selected>Selecione um curso</option>
+            <option value="Administração">Administração</option>
+            <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
+            <option value="Farmácia">Farmacia</option>
+            <option value="Enfermagem">Enfermagem</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="mb-3">
+          <label for="status" class="form-label">Status de Relacionamento</label>
+          <select class="form-select" name="status" required>
+            <option value="" disabled selected>Selecione um status</option>
+            <option value="Solteiro">Solteiro</option>
+            <option value="Casado">Casado</option>
+            <option value="Procurando Alguém">Procurando alguém</option>
+            <option value="Estudando">Estudando</option>
+            <option value="Programando">Programando</option>
+            <option value="Trabalhando">Trabalhanndo</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+      </div>
+      <div class="mb-2 text-small">
+        <a href="/login">Entrar em uma conta já existente</a>
+      </div>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success">
+          Entrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
