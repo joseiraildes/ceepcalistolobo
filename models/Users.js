@@ -40,6 +40,18 @@ const User = sequelize.define("user", {
   data: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  data_nasc: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  curso: {
+    type: DataTypes.STRING,
+    allowNull: false,
   }
 });
 
