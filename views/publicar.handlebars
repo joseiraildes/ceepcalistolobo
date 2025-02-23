@@ -1,0 +1,28 @@
+<div class="container card">
+  <div class="p-3">
+    <h2>
+      Publicar novo conteúdo
+    </h2>
+    <form action="/publicar" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="titulo" class="form-label">Título <strong class="text-danger">*</strong></label>
+        <input type="text" class="form-control" id="titulo" name="titulo" required>
+      </div>
+      <div class="mb-3">
+        <label for="conteudo" class="form-label">Conteúdo <strong class="text-danger">*</strong></label>
+        <textarea class="form-control" id="conteudo" name="conteudo" rows="10" required></textarea>
+      </div>
+      <div class="mb-3">
+        {{!-- import a image --}}
+        <input type="file" class="form-control" id="imagem" name="imagem">
+        <div class="p-2">
+          <small id="imagemHelp" class="form-text text-muted">Selecionar imagem para anexar ao conteúdo (Opcional)</small>
+        </div>
+      </div>
+      <div class="mb-3 d-grid gap-2">
+        <button type="submit" class="btn btn-success">Publicar</button>
+
+      </div>
+    </form>
+  </div>
+</div>

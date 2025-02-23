@@ -10,6 +10,7 @@ const User = require("./models/Users.js")
 const formatName = require("./funcs/formating.js")
 const { marked } = require("marked")
 const date = require("./moment/date.js")
+const upload = require("./upload/files.js")
 
 
 app.use(express.json())
@@ -282,4 +283,11 @@ app.get("/publicar", async(req, res)=>{
       error: error
     })
   }
+})
+
+app.post("/publicar", upload.single("imagem"), async(req, res)=>{
+  const { titulo, conteudo } = req.body
+  const file = req.file
+
+  res.json(file)
 })
