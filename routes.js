@@ -246,3 +246,40 @@ app.post("/cadastro", async(req, res)=>{
     })
   }
 })
+app.get("/publicar", async(req, res)=>{
+  const ip = await Ip()
+
+  try{
+    const user = await User.findOne({
+      where: {
+        ip
+      }
+    })
+
+    if(user === null){
+      res.redirect("/login")
+      console.log({
+        message: "User not found",
+        error: "User not exists",
+        redirecting: "/login"
+      })
+    }else{
+      res.render("publicar", {
+        userName: user["nome"]
+      })
+      // success message
+      console.log({
+        message: "Successiful",
+        userName: user["nome"]
+      })
+    }
+
+  }catch(error){
+
+    console.error("Error fetching user:", error)
+    res.status(500).json({
+      message: "Error fetching user",
+      error: error
+    })
+  }
+})
