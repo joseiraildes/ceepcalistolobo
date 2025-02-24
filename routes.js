@@ -11,6 +11,7 @@ const formatName = require("./funcs/formating.js")
 const { marked } = require("marked")
 const date = require("./moment/date.js")
 const upload = require("./upload/files.js")
+const Post = require("./models/Posts.js")
 
 
 app.use(express.json())
@@ -20,7 +21,7 @@ app.set("view engine", "handlebars")
 app.set("views", path.join(__dirname + "/views"))
 
 app.use(express.static(path.join(__dirname + "/static")))
-
+app.use(express.static(path.join(__dirname + "/images")))
 app.get("/", async(req, res)=>{
   const mysql = await MySql()
   const ip = await Ip()
@@ -286,8 +287,100 @@ app.get("/publicar", async(req, res)=>{
 })
 
 app.post("/publicar", upload.single("imagem"), async(req, res)=>{
+  const ip = await Ip()
   const { titulo, conteudo } = req.body
   const file = req.file
 
-  res.json(file)
+  try{
+    console.log({
+      titulo,
+      conteudo: marked(conteudo),
+      file: file.filename
+    })
+
+    const user = await User.findOne({
+      where: {
+        ip
+      }
+    })
+
+    if(user === null){
+      res.redirect("/login")
+      console.log({
+        message: "User not found",
+        error: "User not exists",
+        redirecting: "/login"
+      })
+    }else{
+      const post = await Post.create({
+        nome: user["nome"],
+        titulo,
+        conteudo: marked(conteudo),
+        imagem: file.filename,
+        data: date,
+        curso: user["curso"],
+      })
+      console.log({
+        status: "OK",
+        message: "Post created successfully",
+      })
+
+      res.redirect(`/@${post["nome"]}/${post["id"]}`)
+    }
+  }catch(error){
+    console.error("Error processing post:", error)
+    res.status(500).json({
+      message: "Error processing post",
+      error: error
+    })
+  }
+})
+
+app.get("/@:nome/:id", async(req, res)=>{
+  const ip = await Ip()
+  const { nome, id } = req.params
+  const mysql = await MySql()
+  try{
+    const user = await User.findOne({
+      where: {
+        ip
+      }
+    })
+    if(user === null){
+      res.redirect("/login")
+      console.log({
+        message: "User not found",
+        error: "User not exists",
+        redirecting: "/login"
+      })
+    }else{
+      const post = await Post.findOne({
+        where: {
+          id
+        }
+      })
+      if(post === null){
+        res.status(404).json({
+          message: "Post not found",
+        })
+      }else{
+        const [ postOne, rows ] = await mysql.query(`SELECT * FROM railway.posts WHERE id = '${id}' AND nome = '${nome}'`)
+        res.render("post", {
+          userName: user["nome"],
+          postOne
+        })
+        console.log({
+          message: "Successiful",
+          userName: user["nome"],
+          postTitle: post["titulo"]
+        })
+      }
+    }
+  }catch(error){
+    console.error("Error fetching user or post:", error)
+    res.status(500).json({
+      message: "Error fetching user or post",
+      error: error
+    })
+  }
 })
