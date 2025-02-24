@@ -55,7 +55,7 @@
           <div class="modal-body">
             <div class="mb-3">
               <label for="comentario" class="form-label"><i>Comentário</i></label>
-              <textarea class="form-control" id="comentario" name="comentario" required></textarea>
+              <textarea class="form-control" id="comentario" name="comentario" style="height: 144px;" required></textarea>
             </div>
           </div>
 
@@ -68,3 +68,35 @@
     </div>
   </div>
 {{/each}}
+<br>
+{{#if comments}}
+{{!-- <div class="container text-center mb-3">
+  <h2 class="text-secondary">Comentários</h2>
+</div> --}}
+<div class="container">
+
+  <div class="card">
+    <div class="card-header text-center">
+      <h2 class="">Comentários</h2>
+    </div>
+    <div class="p-3">
+
+      {{#each comments}}
+        <div class="container">
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between">
+              <a href="/@{{nome}}">{{nome}}</a>
+              <span class="text-muted" title="Data e hora do comentário">{{data}}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-text">
+                {{{comentario}}}
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+{{/if}}
