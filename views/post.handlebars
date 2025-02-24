@@ -13,12 +13,21 @@
           {{data}}
         </strong>
         <br>
-        {{{conteudo}}}
+        <div class="img">
+          <img src="/{{imagem}}" class="card-img-top" alt="">
+        </div>
+        <div class="card-text">
+          {{{conteudo}}}
+        </div>
       </div>
       <div class="card-footer">
         <div class="row">
           <div class="col-md-6 d-grid gap-2">
-            <button type="button" class="btn btn-secondary">Comentar</button>
+            {{!-- <button type="button" class="btn btn-secondary">Comentar</button> --}}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticComment">
+              Comentar
+            </button>
           </div>
           <div class="col-md-6">
             <form action="/@{{nome}}/{{id}}/curtir" method="post">
@@ -28,6 +37,33 @@
             </form>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+<!-- Modal -->
+  <div class="modal fade" id="staticComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Fazer um comentário</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/@{{nome}}/{{id}}/comentar" method="post">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="comentario" class="form-label"><i>Comentário</i></label>
+              <textarea class="form-control" id="comentario" name="comentario" required></textarea>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary">Publicar</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
