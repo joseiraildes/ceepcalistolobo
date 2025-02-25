@@ -444,3 +444,52 @@ app.post("/@:nome/:id/comentar", async(req, res)=>{
     })
   }
 })
+app.post("/@:nome/:id/curtir", async(req, res)=>{
+  const ip = await Ip()
+  const { nome, id } = req.params
+  const mysql = await MySql()
+  try{
+    const user = await User.findOne({
+      where: {
+        ip
+      }
+    })
+    if(user === null){
+      res.redirect("/login")
+      console.log({
+        message: "User not found",
+        error: "User not exists",
+        redirecting: "/login"
+      })
+    }else{
+      const post = await Post.findOne({
+        where: {
+          id
+        }
+      })
+      if(post === null){
+        res.status(404).json({
+          message: "Post not found",
+        })
+      }else{
+        const [ like, rows ] = await mysql.query(`
+          UPDATE posts
+          SET post_like = post_like + 1
+          WHERE nome = '${nome}' AND id = '${id}'
+        `)
+        console.log({
+          message: "Like created successfully",
+          userName: user["nome"],
+          postTitle: post["titulo"]
+        })
+        res.redirect(`/@${nome}/${id}`)
+      }
+    }
+  }catch(error){
+    console.error("Error processing like:", error)
+    res.status(500).json({
+      message: "Error processing like",
+      error: error
+    })
+  }
+})
