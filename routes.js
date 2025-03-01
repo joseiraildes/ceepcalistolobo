@@ -42,8 +42,15 @@ app.get("/", async(req, res)=>{
         redirecting: "/login"
       })
     }else{
+      const [ posts, rows ] = await mysql.query(`
+        SELECT *
+        FROM posts
+        ORDER BY data DESC
+      `)
+
       res.render("home", {
-        userName: user["nome"]
+        userName: user["nome"],
+        posts
       })
       // success message
       console.log({

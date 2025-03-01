@@ -11,7 +11,22 @@
       </button>
     </div>
   </div>
+</div>
 
-
-
+<div class="container">
+  {{#each posts}}
+    <div class="card mb-3 p-3">
+      <div class="d-flex mb-3">
+        <a href="/@{{nome}}" class=" text-decoration-none mx-3">{{nome}}</a>
+        <div class="">
+          <span class="badge bg-primary">{{{data}}}</span>
+        </div>
+      </div>
+      <div class="card-text mx-3">
+        <h6>
+          <a href="/@{{nome}}/{{id}}" class="text-decoration-none">{{titulo}}</a>
+        </h6>
+      </div>
+    </div>
+  {{/each}}
 </div>
